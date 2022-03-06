@@ -43,4 +43,3 @@ public class AccountTaskBatch implements Database.Batchable<sObject> {
              WHERE Id = :bc.getJobId()];
      }
  }
- 
