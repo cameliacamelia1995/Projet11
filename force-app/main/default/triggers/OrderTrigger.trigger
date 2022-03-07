@@ -10,6 +10,6 @@ trigger OrderTrigger on Order (before update, after update, after delete) {
         orderProduct.OrderUncheck(Trigger.new);
     }
     if(Trigger.isAfter && Trigger.isDelete) {
-        orderProduct.OrderUncheck(Trigger.new);
+        orderProduct.OrderUncheck(Trigger.old);
     }
 }

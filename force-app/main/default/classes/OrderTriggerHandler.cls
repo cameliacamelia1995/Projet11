@@ -27,6 +27,8 @@ public class OrderTriggerHandler {
         }
     }
     public void OrderUncheck(List<Order> orderNewList){
+        //Création de la liste a MAJ
+        List<Account> AccUpdate = new List<Account>();
         //Création d'une liste vide de l'id de l'objet account
         Set<Id> idAccount = new Set<Id>();
         for(Order o : orderNewList) {
@@ -37,16 +39,14 @@ public class OrderTriggerHandler {
         }
          //Création d'une liste vide pour les ID des compte Acc & Orders
          //On selectionne l'ID des comptes et des orders ainsi que le champs actif
-        List<Account> AccountAndOrders = [SELECT Id, (SELECT Id, AccountId FROM Orders)
+        List<Account> AccountAndOrders = [SELECT Id, (SELECT Id, AccountId FROM Orders),
                                             Actif__c FROM Account WHERE Id IN : idAccount];
         
-        //Création de la liste a MAJ
-        List<Account> AccUpdate = new List<Account>();
         //On vérifie que le set ID n'est pas vide
         if(idAccount.size() > 0){
             for(Account a : AccountAndOrders) {
                 //Si il n'y a aucun orders lié a ce compte
-                if(a.Orders == null || a.Orders.size() == 0) {
+                if(a.orders == null || a.orders.size() == 0) {
                     //On vérifié que le champs actif est sur true
                 if(a.Actif__c == true){
                     //Assignation sur false
@@ -64,6 +64,8 @@ public class OrderTriggerHandler {
                 }
             }
          }
-         update AccUpdate;
+         if(AccUpdate.size() > 0) {
+            update AccUpdate;
+         }
     }
 }
