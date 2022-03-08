@@ -1,4 +1,4 @@
-// Cette classe contient la logique du code de l'objet Order
+
 public class OrderTriggerHandler {
     //Cette méthode est appelé avant la MAJ de l'object Order
     public void stopIfNoProduct(Map<Id,Order> orderOld, Map<Id,Order> orderNew) {

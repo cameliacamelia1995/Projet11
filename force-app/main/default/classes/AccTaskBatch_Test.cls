@@ -16,7 +16,7 @@ public class AccTaskBatch_Test {
     }
     @IsTest
     public static void checkIfAccHasTask() {
-        TestDataFactory.createdProduct(1, 1, 1, 1);
+        TestDataFactory.createdProduct(1, 0, 1, 0);
         List<Task> oneTask = [SELECT WhatId FROM Task];
         Test.startTest();
         AccountTaskBatch atb = new AccountTaskBatch();
@@ -24,5 +24,10 @@ public class AccTaskBatch_Test {
         Test.stopTest();
         List<Task> StillOneTask = [SELECT WhatId FROM Task];
         System.assertEquals(oneTask.size(), StillOneTask.size());
+    }
+    @isTest 
+    public static void AccWithoutOrTask() {
+        TestDataFactory.createdProduct(1, 0, 1, 0);
+
     }
 }

@@ -1,5 +1,5 @@
 @IsTest
-public with sharing class SchedulerAccTask_Test {
+public class SchedulerAccTask_Test {
     @IsTest
     public static void checkScheduler() {
         Test.startTest();

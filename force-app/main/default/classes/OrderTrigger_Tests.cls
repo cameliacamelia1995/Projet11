@@ -2,7 +2,6 @@
 public with sharing class OrderTrigger_Tests {
     @isTest
     public static void checkNormalRun () {
-        //Méthode qui vérifie que la statut est actif
         TestDataFactory.createdProduct(1, 1, 1, 1);
         List<Order> verifyStatus = [SELECT Id, Status FROM Order LIMIT 1];
         List<Order> newStatus = new List<Order>();
@@ -25,9 +24,9 @@ public with sharing class OrderTrigger_Tests {
                 System.assertEquals('Activated',checkedStatus);
             }
     }
+    
     @isTest
     public static void verifyErrorMessage() {
-        //Méthode pour vérifier quee si il n'y a pas de produit le msg d'erreur s'affiche bien 
         TestDataFactory.createdProduct(1, 1, 0, 0);
         List<Order> orderList = [SELECT Id FROM Order LIMIT 1];
         Test.startTest();
@@ -44,10 +43,8 @@ public with sharing class OrderTrigger_Tests {
     }
     @isTest 
     public static void uncheckIfNoOrder() {
-        // Méthode qui vérifie que la case est décoché si il n'y a pas d'order
         TestDataFactory.createdProduct(1, 1, 0, 1);
-        Account accCheck = [SELECT Id, Actif__c FROM Account WHERE Actif__c = true LIMIT 1];
-        //=: veut dire IN mais pour un objet simple
+        Account accCheck = [SELECT Id, Actif__c FROM Account WHERE Actif__c = true LIMIT 1];’
         List<Order> orderToDelete = [SELECT Id FROM Order WHERE AccountId =: accCheck.Id];
         Test.startTest();
         delete orderToDelete;
